@@ -1,0 +1,9 @@
+{
+  "terminal.integrated.profiles.windows": {
+    "CSE Analytics": {
+      "source": "PowerShell",
+      "args": ["-NoExit", "-Command", "node cli.js"]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "CSE Analytics"
+}

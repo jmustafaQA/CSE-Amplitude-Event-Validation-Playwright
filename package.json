@@ -1,0 +1,18 @@
+{
+  "name": "cse-amplitude-analytics-playwright",
+  "version": "1.0.0",
+  "description": "Playwright-based framework for validating Amplitude Tier-1 analytics events on Common Sense Education pages.",
+  "main": "playwright.config.ts",
+  "scripts": {
+    "start": "node cli.js",
+    "test": "playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0"
+  }
+}

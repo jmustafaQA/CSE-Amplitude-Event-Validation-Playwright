@@ -1,0 +1,104 @@
+name: Amplitude Event Validation
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'Target base URL'
+        required: false
+        default: 'https://qa.commonsense.org'
+
+jobs:
+  amplitude:
+    name: Tier 1 Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Pre-flight checks
+        run: |
+          URL="${{ inputs.base_url }}"
+          echo "── Target URL ────────────────────────────────────"
+          status=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 30 "$URL" || echo "000")
+          if [[ "$status" =~ ^(2|3)[0-9]{2}$ ]]; then
+            echo "✓ $URL is reachable (HTTP $status)"
+          else
+            echo "::warning::$URL returned HTTP $status — tests may fail"
+          fi
+
+          echo "── Spec file check ───────────────────────────────"
+          if [ ! -f "tests/amplitude_events.spec.ts" ]; then
+            echo "::error::tests/amplitude_events.spec.ts not found"
+            exit 1
+          fi
+          echo "✓ amplitude_events.spec.ts present"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Amplitude tests
+        run: npx playwright test
+        env:
+          BASE_URL: ${{ inputs.base_url }}
+          REPORT_ENV: ${{ inputs.base_url == 'https://www.commonsense.org' && 'live' || 'qa' }}
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: amplitude-results-${{ github.run_number }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Push reports to results branch
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          REPORT_DIR="reports"
+          ORIGIN="https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}"
+
+          FILES=$(find "$REPORT_DIR" \( -name "run_*.md" -o -name "run_*.meta.json" \) 2>/dev/null | sort)
+          [ -z "$FILES" ] && { echo "No report files in $REPORT_DIR — skipping"; exit 0; }
+
+          TMP=$(mktemp -d)
+          trap "rm -rf $TMP" EXIT
+
+          if git ls-remote --exit-code --heads "$ORIGIN" results >/dev/null 2>&1; then
+            git clone --branch results --depth 1 --quiet "$ORIGIN" "$TMP/repo"
+          else
+            git clone --depth 1 --quiet "$ORIGIN" "$TMP/repo"
+            git -C "$TMP/repo" checkout -b results
+          fi
+
+          git -C "$TMP/repo" config user.name "github-actions[bot]"
+          git -C "$TMP/repo" config user.email "github-actions[bot]@users.noreply.github.com"
+          git -C "$TMP/repo" remote set-url origin "$ORIGIN"
+
+          for f in $FILES; do
+            rel="${f#$REPORT_DIR/}"
+            mkdir -p "$TMP/repo/$REPORT_DIR/$(dirname "$rel")"
+            cp "$f" "$TMP/repo/$REPORT_DIR/$rel"
+          done
+
+          cd "$TMP/repo"
+          git add "$REPORT_DIR"
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "results: CI run ${{ github.run_id }} (${{ github.ref_name }})"
+          git push origin results
+          echo "Pushed to results branch"
