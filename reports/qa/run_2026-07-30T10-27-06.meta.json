@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-07-30T10-27-06",
+  "environment": "QA",
+  "baseUrl": "https://qa.commonsense.org",
+  "stats": {
+    "passed": 28,
+    "failed": 1,
+    "flaky": 0,
+    "skipped": 3,
+    "total": 32,
+    "passRate": 88,
+    "elapsedMs": 111592
+  },
+  "failures": [
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Clicked / Interaction Events > fires \"Played Video\" on /education/uk/digital-citizenship (Played Video (UK DIY page - Hero Video))",
+      "project": "chromium",
+      "error": "TimeoutError: locator.click: Timeout 10000ms exceeded.",
+      "retries": 0
+    }
+  ],
+  "flakyTests": [],
+  "highRetryTests": []
+}
