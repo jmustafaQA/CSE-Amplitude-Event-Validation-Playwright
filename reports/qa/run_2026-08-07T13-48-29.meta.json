@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-08-07T13-48-29",
+  "environment": "QA",
+  "baseUrl": "https://qa.commonsense.org",
+  "stats": {
+    "passed": 26,
+    "failed": 3,
+    "flaky": 0,
+    "skipped": 3,
+    "total": 32,
+    "passRate": 81,
+    "elapsedMs": 346773
+  },
+  "failures": [
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Course\" on /education/training/advanced-chatgpt-for-k-12 (Viewed Course (Advanced ChatGPT for K-12))",
+      "project": "chromium",
+      "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Clicked / Interaction Events > fires \"Played Video\" on /education/uk/digital-citizenship (Played Video (UK DIY page - Hero Video))",
+      "project": "chromium",
+      "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Clicked / Interaction Events > fires \"Clicked Element\" on /education/collections/quick-digital-citizenship-lessons-for-grades-k-12 (Clicked Element (Collection - Featured Video teaser title button))",
+      "project": "chromium",
+      "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+      "retries": 0
+    }
+  ],
+  "flakyTests": [],
+  "highRetryTests": []
+}
