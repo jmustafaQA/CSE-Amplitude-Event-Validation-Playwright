@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-08-10T20-21-14",
+  "environment": "QA",
+  "baseUrl": "https://qa.commonsense.org",
+  "stats": {
+    "passed": 27,
+    "failed": 2,
+    "flaky": 0,
+    "skipped": 3,
+    "total": 32,
+    "passRate": 84,
+    "elapsedMs": 191164
+  },
+  "failures": [
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Course\" on /education/training/advanced-chatgpt-for-k-12 (Viewed Course (Advanced ChatGPT for K-12))",
+      "project": "chromium",
+      "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Clicked / Interaction Events > fires \"Clicked Link\" on /education (Clicked Link (EDU Homepage Hero CTA))",
+      "project": "chromium",
+      "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+      "retries": 0
+    }
+  ],
+  "flakyTests": [],
+  "highRetryTests": []
+}
