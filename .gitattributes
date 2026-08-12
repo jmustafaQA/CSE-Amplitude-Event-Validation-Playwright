@@ -1,0 +1,15 @@
+# Normalize line endings to LF everywhere so Windows and Mac never disagree on a diff.
+* text=auto eol=lf
+
+# Explicit binary types (belt-and-suspenders on top of git's auto-detection)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.zip binary
+*.pdf binary
