@@ -91,13 +91,19 @@ test.describe('CSE Amplitude Event Validation', () => {
   function runCase(c: Case) {
     const t = c.skip ? test.skip : test;
     t(`fires "${c.eventType}" on ${c.path} (${c.name})`, async ({ page, amplitude }) => {
+      const effectiveTimeout = c.timeoutMs ?? 60000;
+      // The global project timeout (playwright.config.ts) caps every test at 60s. Cases with
+      // a run() step (navigation + UI interaction) or a custom timeoutMs need headroom beyond
+      // that so the test itself doesn't get killed before amplitude.waitForEvent's own,
+      // more descriptive timeout error has a chance to fire.
+      test.setTimeout(effectiveTimeout + 30000);
+
       await amplitude.visit(c.path);
 
       if (c.run) {
         await c.run({ page, amplitude });
       }
 
-      const effectiveTimeout = c.timeoutMs ?? 60000;
       const evt = await amplitude.waitForEvent(c.eventType, c.assert, effectiveTimeout);
       logVerified(c.name, evt);
     });
@@ -466,12 +472,12 @@ test.describe('CSE Amplitude Event Validation', () => {
         return (
           p.page_url_path === '/education/training/advanced-chatgpt-for-k-12' &&
           matchesFullUrl(p.page_url_full, '/education/training/advanced-chatgpt-for-k-12') &&
-          p.page_title === 'Advanced ChatGPT for K-12 | Common Sense Education' &&
+          p.page_title === 'Advanced ChatGPT for K–12 | Common Sense Education' &&
           p.page_http_status_code === 200 &&
           p.page_language === 'en' &&
           p.source_org === 'Common Sense Education' &&
           p.cse_content_type === 'pd_course' &&
-          p.cse_content_title === 'Advanced ChatGPT for K-12' &&
+          p.cse_content_title === 'Advanced ChatGPT for K–12' &&
           p.cse_content_gated === false &&
           p.cse_entity_group === 'node' &&
           p.cse_entity_id === 5122779 &&
@@ -592,26 +598,6 @@ test.describe('CSE Amplitude Event Validation', () => {
         return coreOk && specificOk;
       },
     },
-    {
-      // Skipped: magic_reg_vs_classic experiment is no longer active on /user/login —
-      // the Viewed Experiment Variant event no longer fires for this experiment.
-      // Re-enable if the experiment is relaunched or a new login-page experiment ships.
-      skip: true,
-      name: 'Viewed Experiment Variant (magic_reg_vs_classic)',
-      path: '/user/login',
-      eventType: 'Viewed Experiment Variant',
-      assert: (evt) => {
-        const p = evt.event_properties || {};
-        return (
-          p.page_url_path === '/user/login' &&
-          p.page_http_status_code === 200 &&
-          p.source_org === 'Common Sense Education' &&
-          p.experiment_name === 'magic_reg_vs_classic' &&
-          ['magic_link', 'classic'].includes(p.variant) &&
-          (!p.experiment_magic_reg_vs_classic_variant || p.experiment_magic_reg_vs_classic_variant === p.variant)
-        );
-      },
-    },
   ];
 
   const clickCases: Case[] = [
@@ -648,11 +634,17 @@ test.describe('CSE Amplitude Event Validation', () => {
       name: 'Played Video (UK DIY page - Hero Video)',
       path: '/education/uk/digital-citizenship',
       eventType: 'Played Video',
-      timeoutMs: 60000,
+      timeoutMs: 90000,
       run: async ({ page, amplitude }) => {
-        // Open the video modal, then click the big play button inside it.
+        // Open the video modal, wait for video.js to finish initializing, then click the
+        // big play button inside it.
+        // Settle before the first interaction: on a cold page load the trigger span is
+        // present in the initial HTML before the modal library's click handler attaches,
+        // so clicking immediately can silently no-op.
+        await page.waitForLoadState('networkidle');
         await page.locator("span[id^='video-modal-']").first().click({ force: true });
-        await page.locator('video-js button.vjs-big-play-button').click({ force: true, timeout: 10000 });
+        await page.locator('video.vjs-tech').waitFor({ state: 'attached', timeout: 30000 });
+        await page.locator('button.vjs-big-play-button').click({ force: true, timeout: 30000 });
         await amplitude.flush();
       },
       assert: (evt) => {
@@ -666,6 +658,40 @@ test.describe('CSE Amplitude Event Validation', () => {
           (p.video_provider ? p.video_provider === 'html5' : true) &&
           (p.player_state ? ['playing', 'play'].includes(String(p.player_state).toLowerCase()) : true) &&
           (p.play_initiator ? p.play_initiator === 'click' : true)
+        );
+      },
+    },
+    {
+      name: 'Paused Video (UK DIY page - Hero Video)',
+      path: '/education/uk/digital-citizenship',
+      eventType: 'Paused Video',
+      timeoutMs: 90000,
+      run: async ({ page, amplitude }) => {
+        // Open the video modal, start playback, then pause it via the control bar.
+        // Settle before the first interaction: on a cold page load the trigger span is
+        // present in the initial HTML before the modal library's click handler attaches,
+        // so clicking immediately can silently no-op.
+        await page.waitForLoadState('networkidle');
+        await page.locator("span[id^='video-modal-']").first().click({ force: true });
+        await page.locator('video.vjs-tech').waitFor({ state: 'attached', timeout: 30000 });
+        await page.locator('button.vjs-big-play-button').click({ force: true, timeout: 30000 });
+
+        await page.locator('.video-js').hover();
+        await page.locator('button.vjs-play-control').click({ force: true, timeout: 10000 });
+        await amplitude.flush();
+      },
+      assert: (evt) => {
+        const p = evt.event_properties || {};
+        return (
+          p.page_url_path === '/education/uk/digital-citizenship' &&
+          p.page_http_status_code === 200 &&
+          p.source_org === 'Common Sense Education' &&
+          p.cse_content_type === 'component_page' &&
+          p.cse_entity_id === 5126575 &&
+          (p.video_provider ? p.video_provider === 'html5' : true) &&
+          (p.player_state ? String(p.player_state).toLowerCase() === 'paused' : true) &&
+          (p.video_title ? typeof p.video_title === 'string' && p.video_title.length > 0 : true) &&
+          (typeof p.current_time_seconds === 'number' ? p.current_time_seconds >= 0 : true)
         );
       },
     },
