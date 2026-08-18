@@ -1,0 +1,221 @@
+{
+  "timestamp": "2026-08-18T10-54-31",
+  "environment": "LIVE",
+  "baseUrl": "https://www.commonsense.org",
+  "stats": {
+    "passed": 0,
+    "failed": 29,
+    "flaky": 0,
+    "skipped": 3,
+    "total": 32,
+    "passRate": 0,
+    "elapsedMs": 111
+  },
+  "failures": [
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Search\" on /education/search?keywords=privacy (Viewed Search)",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Search\" on /education/search?f%5B0%5D=search_type%3Acollection&sort_by=field_search_sort_date (Viewed Search (Collections filter + Sort by date))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Lesson Info\" on /education/digital-literacy (Viewed Lesson Info (Digital Literacy))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Lesson Info\" on /education/digital-citizenship (Viewed Lesson Info (Digital Citizenship))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Lesson Info\" on /education/uk/digital-citizenship (Viewed Lesson Info (UK Digital Citizenship))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Edu Home Page\" on /education (Viewed Edu Home Page)",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Lesson Plan\" on /education/digital-literacy/what-is-media (Viewed Lesson Plan (What Is Media?))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Course\" on /education/training/teaching-digital-literacy-and-well-being (Viewed Course (Teaching Digital Literacy and Well-Being))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Article\" on /education/articles/reduce-student-anxiety-and-your-own-during-uncertain-times (Viewed Article (Reduce Student Anxiety))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Lesson Collection\" on /education/collections/digital-citizenship-lessons-for-grades-9-12 (Viewed Lesson Collection (Grades 9-12))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed 404 Page\" on /education/blargh (Viewed 404 Page (/education/blargh))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Video\" on /education/videos/what-is-ai (Viewed Video (What Is AI?))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Page\" on /education/ai-in-schools (Viewed Page (AI in Schools))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Lesson Collection\" on /education/uk/collections/ai-literacy-lessons-for-years-7-13 (Viewed Lesson Collection (UK AI Literacy))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Lesson Collection\" on /education/collections/digital-citizenship-for-early-years-and-primary-learners-uk (Viewed Lesson Collection (UK DC Early Years))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Course\" on /education/training/ai-basics-for-k-12-teachers (Viewed Course (AI Basics for K-12 Teachers))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Course\" on /education/training/chatgpt-k12-foundations (Viewed Course (ChatGPT Foundations for K-12 Educators))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Course\" on /education/training/advanced-chatgpt-for-k-12 (Viewed Course (Advanced ChatGPT for K-12))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Course\" on /education/training/modeling-healthy-digital-habits (Viewed Course (Modeling Healthy Digital Habits))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Article\" on /education/articles/chatgpt-and-beyond-how-to-handle-ai-in-schools (Viewed Article (ChatGPT and Beyond))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Article\" on /education/articles/teachers-essential-guide-to-ai-fundamentals-with-apple (Viewed Article (Teachers Essential Guide to AI with Apple))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Registration Events > fires \"Viewed Registration Form\" on /user/register (Viewed Registration Form)",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Auth Events > fires \"Viewed Login Form\" on /user/login (Viewed Login Form)",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Clicked / Interaction Events > fires \"Clicked Link\" on /education (Clicked Link (EDU Homepage Hero CTA))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Clicked / Interaction Events > fires \"Played Video\" on /education/uk/digital-citizenship (Played Video (UK DIY page - Hero Video))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Clicked / Interaction Events > fires \"Clicked Element\" on /education/collections/quick-digital-citizenship-lessons-for-grades-k-12 (Clicked Element (Collection - Featured Video teaser title button))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Clicked / Interaction Events > fires \"Clicked Element\" on /education/collections/quick-digital-citizenship-lessons-for-grades-k-12 (Clicked Element (Collection Modal - Video.js big \"Play Video\" button))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Video Events > fires \"Played Video\" on /education/collections/quick-digital-citizenship-lessons-for-grades-k-12 (Played Video (Collection Featured Video))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Video Events > fires \"Paused Video\" on /education/collections/quick-digital-citizenship-lessons-for-grades-k-12 (Paused Video (Collection Featured Video))",
+      "project": "chromium",
+      "error": "Error: browserType.launch: Executable doesn't exist at C:\\Users\\jmust\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1228\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "retries": 0
+    }
+  ],
+  "flakyTests": [],
+  "highRetryTests": []
+}
