@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-08-18T12-06-49",
+  "environment": "LIVE",
+  "baseUrl": "https://www.commonsense.org",
+  "stats": {
+    "passed": 27,
+    "failed": 3,
+    "flaky": 0,
+    "skipped": 0,
+    "total": 30,
+    "passRate": 90,
+    "elapsedMs": 332658
+  },
+  "failures": [
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Lesson Info\" on /education/digital-literacy (Viewed Lesson Info (Digital Literacy))",
+      "project": "chromium",
+      "error": "Error: Amplitude event captured but predicate did not match: Viewed Lesson Info. Captured 1 event(s). Seen: $identify, session_start, Viewed Lesson Info",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Lesson Plan\" on /education/digital-literacy/what-is-media (Viewed Lesson Plan (What Is Media?))",
+      "project": "chromium",
+      "error": "Error: Amplitude event captured but predicate did not match: Viewed Lesson Plan. Captured 1 event(s). Seen: $identify, session_start, Viewed Lesson Plan",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Clicked / Interaction Events > fires \"Clicked Link\" on /education (Clicked Link (EDU Homepage Hero CTA))",
+      "project": "chromium",
+      "error": "Error: Amplitude event not captured: Clicked Link. Seen: $identify, session_start, Viewed Edu Home Page",
+      "retries": 0
+    }
+  ],
+  "flakyTests": [],
+  "highRetryTests": []
+}
