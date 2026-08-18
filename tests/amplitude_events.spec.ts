@@ -755,45 +755,6 @@ test.describe('CSE Amplitude Event Validation', () => {
         );
       },
     },
-    {
-      // skip: [data-ampl-media-asset-type="Slideshow"] no longer present on page — re-enable once selector is confirmed
-      skip: true,
-      name: 'Opened Lesson Slide Modal (What Is Media?)',
-      path: '/education/digital-literacy/what-is-media',
-      eventType: 'Opened Lesson Slide Modal',
-      timeoutMs: 30000,
-      run: async ({ page, amplitude }) => {
-        await page.locator('[data-ampl-media-asset-type="Slideshow"]').first().click({ force: true, timeout: 10000 });
-        await amplitude.flush();
-      },
-      assert: (evt) => {
-        const p = evt.event_properties || {};
-        return p.page_url_path === '/education/digital-literacy/what-is-media' &&
-          p.media_type === 'Slideshow' &&
-          optionalEq(p, 'media_id', '2039540');
-      },
-    },
-    {
-      // skip: [data-ampl-media-asset-type="Remote Document"] no longer present on page — re-enable once selector is confirmed
-      skip: true,
-      name: 'Opened Student Handout Modal (What Is Media?)',
-      path: '/education/digital-literacy/what-is-media',
-      eventType: 'Opened Student Handout Modal',
-      timeoutMs: 30000,
-      run: async ({ page, amplitude }) => {
-        await page
-          .locator('[data-ampl-media-asset-type="Remote Document"]')
-          .first()
-          .click({ force: true, timeout: 10000 });
-        await amplitude.flush();
-      },
-      assert: (evt) => {
-        const p = evt.event_properties || {};
-        return p.page_url_path === '/education/digital-literacy/what-is-media' &&
-          p.media_type === 'Remote Document' &&
-          optionalEq(p, 'media_id', '2039539');
-      },
-    },
   ];
 
   const videoCases: Case[] = [

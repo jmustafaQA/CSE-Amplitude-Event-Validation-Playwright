@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-08-17T14-23-59",
+  "environment": "QA",
+  "baseUrl": "https://qa.commonsense.org",
+  "stats": {
+    "passed": 29,
+    "failed": 1,
+    "flaky": 0,
+    "skipped": 0,
+    "total": 30,
+    "passRate": 97,
+    "elapsedMs": 98327
+  },
+  "failures": [
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed 404 Page\" on /education/blargh (Viewed 404 Page (/education/blargh))",
+      "project": "chromium",
+      "error": "Error: page.goto: net::ERR_NETWORK_CHANGED at https://qa.commonsense.org/education/blargh",
+      "retries": 0
+    }
+  ],
+  "flakyTests": [],
+  "highRetryTests": []
+}
