@@ -160,15 +160,19 @@ test.describe('CSE Amplitude Event Validation', () => {
       eventType: 'Viewed Lesson Info',
       assert: (evt) => {
         const p = evt.event_properties || {};
+        // Live has been retitled to add a "K-8" suffix; QA content hasn't caught up yet.
+        // Accept both until the environments converge.
         return (
           p.page_url_path === '/education/digital-literacy' &&
           matchesFullUrl(p.page_url_full, '/education/digital-literacy') &&
-          p.page_title === 'Digital Literacy & Well-Being Curriculum | Common Sense Education' &&
+          ['Digital Literacy & Well-Being Curriculum | Common Sense Education',
+            'Digital Literacy & Well-Being Curriculum K-8 | Common Sense Education'].includes(p.page_title) &&
           p.page_http_status_code === 200 &&
           p.page_language === 'en' &&
           p.source_org === 'Common Sense Education' &&
           p.cse_content_type === 'component_page' &&
-          p.cse_content_title === 'Digital Literacy & Well-Being Curriculum' &&
+          ['Digital Literacy & Well-Being Curriculum',
+            'Digital Literacy & Well-Being Curriculum K-8'].includes(p.cse_content_title) &&
           p.cse_entity_group === 'node' &&
           p.cse_entity_id === 5122762
         );
@@ -237,10 +241,13 @@ test.describe('CSE Amplitude Event Validation', () => {
       eventType: 'Viewed Lesson Plan',
       assert: (evt) => {
         const p = evt.event_properties || {};
+        // Live has been retitled with a descriptive subtitle; QA content hasn't caught up yet.
+        // Accept both until the environments converge.
         return (
           p.page_url_path === '/education/digital-literacy/what-is-media' &&
           matchesFullUrl(p.page_url_full, '/education/digital-literacy/what-is-media') &&
-          p.page_title === 'What Is Media? | Common Sense Education' &&
+          ['What Is Media? | Common Sense Education',
+            'What Is Media? A Simple Definition for Kids | Common Sense Education'].includes(p.page_title) &&
           p.page_http_status_code === 200 &&
           p.page_language === 'en' &&
           p.source_org === 'Common Sense Education' &&
