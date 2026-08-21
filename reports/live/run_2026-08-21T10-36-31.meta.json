@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-08-21T10-36-31",
+  "environment": "LIVE",
+  "baseUrl": "https://www.commonsense.org",
+  "stats": {
+    "passed": 28,
+    "failed": 2,
+    "flaky": 0,
+    "skipped": 0,
+    "total": 30,
+    "passRate": 93,
+    "elapsedMs": 260591
+  },
+  "failures": [
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Article\" on /education/articles/teachers-essential-guide-to-ai-fundamentals-with-apple (Viewed Article (Teachers Essential Guide to AI with Apple))",
+      "project": "chromium",
+      "error": "\u001b[31mTest timeout of 90000ms exceeded.\u001b[39m",
+      "retries": 0
+    },
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Clicked / Interaction Events > fires \"Clicked Link\" on /education (Clicked Link (EDU Homepage Hero CTA))",
+      "project": "chromium",
+      "error": "Error: Amplitude event not captured: Clicked Link. Seen: $identify, session_start, Viewed Edu Home Page",
+      "retries": 0
+    }
+  ],
+  "flakyTests": [],
+  "highRetryTests": []
+}
