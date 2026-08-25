@@ -7,7 +7,9 @@
 // `npm test`/CI run never prints these lines — this reporter is a no-op outside the dashboard.
 // Ported verbatim from CSE-E2E-Playwright/reporters/dashboard-reporter.ts (see there for the
 // retries/onTestEnd rationale) — this repo runs retries: 0, so every onTestEnd is already the
-// final attempt, but the guard is kept for parity in case that config ever changes.
+// final attempt, but the guard (and the onEnd catch-up sweep below, for a still-possible
+// shouldNotRetryTest edge case — see CSE-E2E-Playwright's copy) is kept for parity in case
+// that config ever changes.
 import * as path from 'path';
 import type { FullConfig, Reporter, Suite, TestCase, TestResult } from '@playwright/test/reporter';
 
@@ -18,9 +20,20 @@ function emit(type: string, data: Record<string, unknown>): void {
   console.log(`\n__DASH__:${JSON.stringify({ type, ...data })}`);
 }
 
+function testCompletePayload(test: TestCase, result: TestResult): Record<string, unknown> {
+  const outcome = test.outcome(); // 'expected' | 'unexpected' | 'flaky' | 'skipped' — trustworthy now that retries are exhausted
+  const spec = path.basename(test.location.file);
+  const error = outcome === 'unexpected' ? (result.errors?.[0]?.message || 'No error message').split('\n')[0] : undefined;
+  return { spec, title: test.title, status: outcome, duration: result.duration, retries: result.retry, error };
+}
+
 export default class DashboardReporter implements Reporter {
+  private rootSuite: Suite | undefined;
+  private reported = new Set<string>(); // test.id values already emitted live, so onEnd's sweep never double-reports one
+
   onBegin(_config: FullConfig, suite: Suite): void {
     if (!process.env.PW_DASH_EVENTS) return;
+    this.rootSuite = suite;
 
     const bySpec: Record<string, number> = {};
     for (const test of suite.allTests()) {
@@ -38,10 +51,18 @@ export default class DashboardReporter implements Reporter {
     const isFinalAttempt = result.status === 'passed' || result.status === 'skipped' || result.retry >= test.retries;
     if (!isFinalAttempt) return;
 
-    const outcome = test.outcome(); // 'expected' | 'unexpected' | 'flaky' | 'skipped' — trustworthy now that retries are exhausted
-    const spec = path.basename(test.location.file);
-    const error = outcome === 'unexpected' ? (result.errors?.[0]?.message || 'No error message').split('\n')[0] : undefined;
+    this.reported.add(test.id);
+    emit('test-complete', testCompletePayload(test, result));
+  }
 
-    emit('test-complete', { spec, title: test.title, status: outcome, duration: result.duration, retries: result.retry, error });
+  onEnd(): void {
+    if (!process.env.PW_DASH_EVENTS || !this.rootSuite) return;
+
+    for (const test of this.rootSuite.allTests()) {
+      if (this.reported.has(test.id)) continue;
+      const result = test.results[test.results.length - 1];
+      if (!result) continue; // never actually ran
+      emit('test-complete', testCompletePayload(test, result));
+    }
   }
 }
