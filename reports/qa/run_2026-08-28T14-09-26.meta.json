@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-08-28T14-09-26",
+  "environment": "QA",
+  "baseUrl": "https://qa.commonsense.org",
+  "stats": {
+    "passed": 29,
+    "failed": 1,
+    "flaky": 0,
+    "skipped": 0,
+    "total": 30,
+    "passRate": 97,
+    "elapsedMs": 145500
+  },
+  "failures": [
+    {
+      "spec": "amplitude_events.spec.ts",
+      "title": "CSE Amplitude Event Validation > Viewed Events > fires \"Viewed Lesson Info\" on /education/digital-literacy (Viewed Lesson Info (Digital Literacy))",
+      "project": "chromium",
+      "error": "Error: Amplitude event captured but predicate did not match: Viewed Lesson Info. Captured 1 event(s). Seen: $identify, session_start, Viewed Lesson Info",
+      "retries": 0
+    }
+  ],
+  "flakyTests": [],
+  "highRetryTests": []
+}
