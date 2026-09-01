@@ -160,19 +160,21 @@ test.describe('CSE Amplitude Event Validation', () => {
       eventType: 'Viewed Lesson Info',
       assert: (evt) => {
         const p = evt.event_properties || {};
-        // Live has been retitled to add a "K-8" suffix; QA content hasn't caught up yet.
-        // Accept both until the environments converge.
+        // Title suffix has been in flux across environments (none, "K-8", now "K-12").
+        // Accept all seen variants until the environments converge.
         return (
           p.page_url_path === '/education/digital-literacy' &&
           matchesFullUrl(p.page_url_full, '/education/digital-literacy') &&
           ['Digital Literacy & Well-Being Curriculum | Common Sense Education',
-            'Digital Literacy & Well-Being Curriculum K-8 | Common Sense Education'].includes(p.page_title) &&
+            'Digital Literacy & Well-Being Curriculum K-8 | Common Sense Education',
+            'Digital Literacy & Well-Being Curriculum K-12 | Common Sense Education'].includes(p.page_title) &&
           p.page_http_status_code === 200 &&
           p.page_language === 'en' &&
           p.source_org === 'Common Sense Education' &&
           p.cse_content_type === 'component_page' &&
           ['Digital Literacy & Well-Being Curriculum',
-            'Digital Literacy & Well-Being Curriculum K-8'].includes(p.cse_content_title) &&
+            'Digital Literacy & Well-Being Curriculum K-8',
+            'Digital Literacy & Well-Being Curriculum K-12'].includes(p.cse_content_title) &&
           p.cse_entity_group === 'node' &&
           p.cse_entity_id === 5122762
         );
@@ -613,6 +615,10 @@ test.describe('CSE Amplitude Event Validation', () => {
       path: '/education',
       eventType: 'Clicked Link',
       run: async ({ page, amplitude }) => {
+        // Settle before the first interaction: on a cold page load Amplitude's document-level
+        // click listener (loaded via GTM) may not have attached yet, so clicking immediately
+        // can silently no-op. Same race as the Played Video case below.
+        await page.waitForLoadState('networkidle');
         const link = page.locator('.home-marketing-block a.btn').first();
         // preventDefault stops navigation; propagation is intentionally left alone
         // so Amplitude's document-level click listener still fires.
