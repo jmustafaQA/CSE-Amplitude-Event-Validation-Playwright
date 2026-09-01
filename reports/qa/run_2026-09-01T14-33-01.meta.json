@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-09-01T14-33-01",
+  "environment": "QA",
+  "baseUrl": "https://qa.commonsense.org",
+  "stats": {
+    "passed": 30,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "total": 30,
+    "passRate": 100,
+    "elapsedMs": 82140
+  },
+  "failures": [],
+  "flakyTests": [],
+  "highRetryTests": []
+}
